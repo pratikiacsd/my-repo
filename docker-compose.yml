@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: web_server
+    ports:
+      - "8080:80"
+      - "8443:443"
+
+  db:
+    image: mysql:latest
+    container_name: mysqldb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecret
+      MYSQL_DATABASE: cars
+      MYSQL_PASSWORD: wordpress
+
+  web1:
+    image: httpd:latest
+    container_name: apache_server
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./html:/usr/local/apache2/htdocs/
+
+
+
+# If docker compose not installed --> sudo apt install docker-compose
+# docker compose up -d --build
+
+# docker compose down
+
+# docker exec -it my-nginx /bin/bash  <--- go to inside container
+# docker exec -it mysqldb /bin/bash  <--- go to inside container 
+# docker exec -it httpd /bin/bash  <--- go to inside container 
+
+# mysql -u root -p    <----- This command for enter mysql database
+
+
+
+
+
